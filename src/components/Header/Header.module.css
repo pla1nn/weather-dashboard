@@ -1,0 +1,51 @@
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 34px;
+  height: 22px;
+}
+
+.headerList {
+}
+
+@media screen and (min-width: 768px) {
+  .logo {
+    width: 54px;
+    height: 36px;
+  }
+
+  .headerList {
+    display: flex;
+    gap: 45px;
+    align-items: center;
+  }
+  .headerItem {
+    font-family: 'Montserrat Alternates';
+    font-size: 12px;
+
+    font-weight: 500;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .logo {
+    width: 82px;
+    height: 56px;
+  }
+  .headerList {
+  }
+  .headerItem {
+  }
+}
+
+.headerItem {
+}
+
+.button {
+}
+
+.iconUser {
+}
