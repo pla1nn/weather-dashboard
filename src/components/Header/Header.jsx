@@ -1,10 +1,11 @@
 import { FaCircleUser } from 'react-icons/fa6';
 import s from './Header.module.css';
+import logo from '../../assets/logo.png';
 
 export const Header = () => {
   return (
     <header className={s.header}>
-      <img className={s.logo} src="/assets/logo.png" alt="logo" />
+      <img className={s.logo} src={logo} alt="logo" />
       <ul className={s.headerList}>
         <li className={s.headerItem}>Who we are</li>
         <li className={s.headerItem}>Contacts</li>
