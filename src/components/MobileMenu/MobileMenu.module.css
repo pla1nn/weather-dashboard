@@ -1,0 +1,17 @@
+.mobileMenuContainer {
+  position: absolute;
+  top: 50px;
+  left: -50px;
+  width: 100vw;
+  padding: 30px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e6e6e6;
+}
+
+@media screen and (min-width: 768px) {
+  .mobileMenuButton {
+    display: none;
+  }
+}
