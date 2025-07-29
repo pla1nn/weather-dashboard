@@ -23,11 +23,12 @@ export const App = () => {
       <Header />
 
       <Hero onSearch={handleSearch}></Hero>
+
     <Container>
 
       {weather && <CardList weather={weather}></CardList>}
 
-      <Stats></Stats>
+      {weather && <Stats weather={weather}></Stats>}
 
       <Pets></Pets>
     </Container>
