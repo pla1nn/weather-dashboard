@@ -3,7 +3,7 @@ import s from './Header.module.css';
 import logo from '../../assets/logo.png';
 import { MobileMenu } from 'components/MobileMenu/MobileMenu';
 
-export const Header = () => {
+export const Header = ({ onOpenSignUp }) => {
   return (
     <header className={s.header}>
       <img className={s.logo} src={logo} alt="logo" />
@@ -13,12 +13,12 @@ export const Header = () => {
         <li className={s.headerItem}>Menu</li>
       </ul>
       <div className={s.userContainer}>
-        <button className={s.button} type="button">
+        <button className={s.button} type="button" onClick={onOpenSignUp}>
           Sign Up
         </button>
         <FaCircleUser className={s.iconUser} />
       </div>
-      <MobileMenu />
+      <MobileMenu onOpenSignUp={onOpenSignUp} />
     </header>
   );
 };

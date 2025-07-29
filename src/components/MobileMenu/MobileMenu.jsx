@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import s from './MobileMenu.module.css';
+import { FaCircleUser } from 'react-icons/fa6';
 
-export const MobileMenu = () => {
+export const MobileMenu = ({ onOpenSignUp }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleMenuClick = () => {
-    setIsVisible(prevState => !prevState);
+    setIsVisible(prev => !prev);
   };
 
   return (
@@ -18,6 +19,7 @@ export const MobileMenu = () => {
         Menu
         {isVisible ? (
           <svg
+            className={s.svg}
             xmlns="http://www.w3.org/2000/svg"
             width="7"
             height="10"
@@ -54,6 +56,13 @@ export const MobileMenu = () => {
             <li className={s.menuItem}>Contacts</li>
             <li className={s.menuItem}>Menu</li>
           </ul>
+
+          <div className={s.mobileUser}>
+            <button className={s.button} type="button" onClick={onOpenSignUp}>
+              Sign Up
+            </button>
+            <FaCircleUser className={s.iconUser} />
+          </div>
         </div>
       )}
     </>
