@@ -30,7 +30,11 @@ export const App = () => {
         <Header onOpenSignUp={openSignUpForm} />
       </Container>
 
-      <Hero onSearch={handleSearch} />
+
+      <Hero onSearch={handleSearch}></Hero>
+
+    <Container>
+
 
       <Container>
         {weather && <CardList weather={weather} />}
@@ -38,7 +42,11 @@ export const App = () => {
         <Pets />
       </Container>
 
+
       <MobileMenu onOpenSignUp={openSignUpForm} />
+
+      {weather && <Stats weather={weather}></Stats>}
+
 
       {showSignUpForm && <SignUpForm onClose={closeSignUpForm} />}
     </>
