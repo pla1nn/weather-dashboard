@@ -4,7 +4,7 @@ import s from './MobileMenu.module.css';
 export const MobileMenu = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const toglleMenuClick = () => {
+  const toggleMenuClick = () => {
     setIsVisible(prevState => !prevState);
   };
 
@@ -13,7 +13,7 @@ export const MobileMenu = () => {
       <button
         className={s.mobileMenuButton}
         type="button"
-        onClick={toglleMenuClick}
+        onClick={toggleMenuClick}
       >
         Menu
         {isVisible ? (
@@ -27,7 +27,7 @@ export const MobileMenu = () => {
             <path
               d="M1.24219 9.24268L5.48483 5.00004L1.24219 0.757395"
               stroke="black"
-              stroke-linecap="round"
+              strokeLinecap="round"
             />
           </svg>
         ) : (
@@ -41,13 +41,21 @@ export const MobileMenu = () => {
             <path
               d="M1 1L5.24264 5.24264L9.48528 1"
               stroke="black"
-              stroke-linecap="round"
+              strokeLinecap="round"
             />
           </svg>
         )}
       </button>
 
-      {isVisible && <div className={s.mobileMenuContainer}></div>}
+      {isVisible && (
+        <div className={s.mobileMenuContainer}>
+          <ul className={s.menuList}>
+            <li className={s.menuItem}>Who we are</li>
+            <li className={s.menuItem}>Contacts</li>
+            <li className={s.menuItem}>Menu</li>
+          </ul>
+        </div>
+      )}
     </>
   );
 };
