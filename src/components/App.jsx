@@ -5,11 +5,8 @@ import { Header } from './Header/Header';
 
 import { Hero } from './Hero/Hero';
 import { Pets } from './Pets/Pets';
-import { getLocation, getWeather } from './services/weatherApi';
-
-
-
-  
+import { getLocation, getWeather } from '../services/weatherApi';
+import { Stats } from './Stats/Stats';
 
 export const App = () => {
   const [weather, setWrather] = useState(null);
@@ -18,7 +15,7 @@ export const App = () => {
     getLocation(cityName)
       .then(coords => getWeather(coords.lat, coords.lon))
       .then(data => setWrather(data))
-      .catch(() => setWrather(null))
+      .catch(() => setWrather(null));
   };
 
   return (
@@ -26,10 +23,10 @@ export const App = () => {
       <Header />
 
       <Hero onSearch={handleSearch}></Hero>
+
       {weather && <CardList weather={weather}></CardList>}
 
-
-
+      <Stats></Stats>
 
       <Pets></Pets>
     </Container>

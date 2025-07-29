@@ -6,6 +6,7 @@ import reload from './imgs/reload.svg';
 export const CardItem = ({weather: {name, sys: {country}, main: {temp}, dt, weather: weatherDetails}}) => {
     const date = new Date(dt * 1000)
     const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString();
     const day = date.toLocaleDateString('en-US', {weekday: 'long'})
     const dateText = date.toLocaleDateString()
     
@@ -19,7 +20,7 @@ export const CardItem = ({weather: {name, sys: {country}, main: {temp}, dt, weat
                 <LocationText>{name}</LocationText>
                 <LocationText>{countryName}</LocationText>
             </LocationContainer>
-            <Time>{hours}:00</Time>
+            <Time>{hours}:{minutes}</Time>
             <ForecastBtn type="button">Hourly forecast</ForecastBtn>
             <DateContainer>
                 <DateText>{dateText}</DateText>
