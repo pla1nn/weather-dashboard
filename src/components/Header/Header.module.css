@@ -103,6 +103,8 @@
   padding: 14px 16px;
   background-color: #fff;
   z-index: 1000;
+  margin-left: 150px;
+  margin-right: 150px;
 }
 
 .logo {

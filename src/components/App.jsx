@@ -19,10 +19,11 @@ export const App = () => {
   };
 
   return (
-    <Container>
+    <>
       <Header />
 
       <Hero onSearch={handleSearch}></Hero>
+    <Container>
 
       {weather && <CardList weather={weather}></CardList>}
 
@@ -30,5 +31,6 @@ export const App = () => {
 
       <Pets></Pets>
     </Container>
+    </>
   );
 };
