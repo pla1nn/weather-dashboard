@@ -1,13 +1,14 @@
 .mobileMenuContainer {
-  position: absolute;
+  position: fixed;
   top: 50px;
-  left: -50px;
+  left: 0;
   width: 100vw;
   padding: 30px 50px;
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
   background-color: #e6e6e6;
+  z-index: 1000;
 }
 
 @media screen and (min-width: 768px) {
@@ -27,8 +28,49 @@
 
 .menuItem {
   font-family: 'Montserrat Alternates', sans-serif;
-  font-size: 18px;
+  font-size: 10px;
   font-weight: 500;
   color: #000;
   cursor: pointer;
+}
+
+.mobileMenuButton {
+  color: #000;
+  font-family: 'Montserrat Alternates';
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.svg {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+}
+
+.mobileUser {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 8px;
+  padding-right: 15px;
+}
+
+.button {
+  background-color: #ffb36c;
+  padding: 8px 16px;
+  border-radius: 10px;
+  color: #000;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat Alternates';
+  font-size: 9px;
+}
+
+.iconUser {
+  width: 40px;
+  height: 40px;
+  color: #556080;
+  margin: 0 auto;
 }
