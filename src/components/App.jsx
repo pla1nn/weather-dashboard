@@ -42,4 +42,5 @@ export const App = () => {
 
     {showSignUpForm && <SignUpForm onClose={closeSignUpForm} />}
   </>
-);
+  );
+};
