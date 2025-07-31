@@ -25,30 +25,21 @@ export const App = () => {
   const closeSignUpForm = () => setShowSignUpForm(false);
 
   return (
-    <>
-      <Container>
-        <Header onOpenSignUp={openSignUpForm} />
-      </Container>
+  <>
+    <Container>
+      <Header onOpenSignUp={openSignUpForm} />
+    </Container>
 
-
-      <Hero onSearch={handleSearch}></Hero>
+    <Hero onSearch={handleSearch} />
 
     <Container>
+      {weather && <CardList weather={weather} />}
+      {weather && <Stats weather={weather} />}
+      <Pets />
+    </Container>
 
+    <MobileMenu onOpenSignUp={openSignUpForm} />
 
-      <Container>
-        {weather && <CardList weather={weather} />}
-        <Stats />
-        <Pets />
-      </Container>
-
-
-      <MobileMenu onOpenSignUp={openSignUpForm} />
-
-      {weather && <Stats weather={weather}></Stats>}
-
-
-      {showSignUpForm && <SignUpForm onClose={closeSignUpForm} />}
-    </>
-  );
-};
+    {showSignUpForm && <SignUpForm onClose={closeSignUpForm} />}
+  </>
+);
