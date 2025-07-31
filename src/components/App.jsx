@@ -9,6 +9,7 @@ import { Hero } from './Hero/Hero';
 import { Pets } from './Pets/Pets';
 import { getLocation, getWeather } from '../services/weatherApi';
 import { Stats } from './Stats/Stats';
+import { Table } from './Table/Table'
 
 export const App = () => {
   const [weather, setWeather] = useState(null);
@@ -20,6 +21,8 @@ export const App = () => {
       .then(data => setWeather(data))
       .catch(() => setWeather(null));
   };
+
+
 
   const openSignUpForm = () => setShowSignUpForm(true);
   const closeSignUpForm = () => setShowSignUpForm(false);
@@ -35,6 +38,7 @@ export const App = () => {
     <Container>
       {weather && <CardList weather={weather} />}
       {weather && <Stats weather={weather} />}
+      {weather && <Table weather={weather} />}
       <Pets />
     </Container>
 
