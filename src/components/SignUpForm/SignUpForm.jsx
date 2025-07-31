@@ -7,12 +7,42 @@ export const SignUpForm = ({ onClose }) => {
         <button className={s.closeBtn} type="button" onClick={onClose}>
           ×
         </button>
-        <h2>Sign Up</h2>
-        <form>
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          <button type="submit">Submit</button>
+        <h2 className={s.title}>Sign up</h2>
+        <form className={s.form}>
+          <label className={s.text}>
+            Username
+            <input
+              className={s.placeholder}
+              type="text"
+              placeholder="Username"
+              required
+            />
+          </label>
+          <label className={s.text}>
+            E-Mail
+            <input
+              className={s.placeholder}
+              type="email"
+              placeholder="E-Mail"
+              required
+            />
+          </label>
+          <label className={s.text}>
+            Password
+            <input
+              className={s.placeholder}
+              type="password"
+              placeholder="Password"
+              required
+            />
+          </label>
+          <button type="submit" className={s.submitBtn}>
+            Sign up
+          </button>
         </form>
+        <p className={s.loginText}>
+          Already have an account? <a href="#"> Log In</a>
+        </p>
       </div>
     </div>
   );

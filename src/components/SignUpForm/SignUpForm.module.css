@@ -13,12 +13,13 @@
 
 .formContainer {
   background: white;
-  padding: 30px 40px;
-  border-radius: 15px;
-  width: 320px;
+  padding: 40px 30px;
+  border-radius: 30px;
+  width: 350px;
   max-width: 90vw;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   position: relative;
+  text-align: left;
 }
 
 .closeBtn {
@@ -29,4 +30,99 @@
   background: transparent;
   border: none;
   cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-family: 'Montserrat Alternates';
+  font-weight: 500;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.form input {
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: #e0e0e0;
+  font-size: 14px;
+}
+
+.submitBtn {
+  padding: 10px 30px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 107px;
+  height: 35px;
+  margin: 0 auto;
+  display: block;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffa654;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #000;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.submitBtn:hover {
+  background-color: #ff9940;
+}
+
+.loginText {
+  margin-top: 15px;
+  text-align: center;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.loginText a {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.text {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.placeholder {
+  color: #ababab;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 500;
 }
