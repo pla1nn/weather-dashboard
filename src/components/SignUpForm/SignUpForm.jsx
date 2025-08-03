@@ -41,7 +41,7 @@ export const SignUpForm = ({ onClose }) => {
           </button>
         </form>
         <p className={s.loginText}>
-          Already have an account? <a href="#"> Log In</a>
+          Already have an account? <span> Log In</span>
         </p>
       </div>
     </div>
