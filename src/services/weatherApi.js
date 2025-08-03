@@ -21,6 +21,18 @@ export const getWeather = (lat, lon) => {
   ).then(response => response.json());
 };
 
+export const getHourlForecast = (lat, lon) => {
+  return fetch(
+    `${BASE_URL}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+  ).then(response => response.json());
+};
+
+export const getDailyForecast = (lat, lon) => {
+  return fetch(
+    `${BASE_URL}/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=8&appid=${API_KEY}&units=metric`
+  ).then(response => response.json())
+}
+
 getLocation(city)
   .then(coords => {
     return getWeather(coords.lat, coords.lon);
