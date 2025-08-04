@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CardList } from './Cards/CardList/CardList';
 import Container from './Container/Container';
 import { Header } from './Header/Header';
@@ -7,51 +7,86 @@ import { SignUpForm } from './SignUpForm/SignUpForm';
 
 import { Hero } from './Hero/Hero';
 import { Pets } from './Pets/Pets';
-import { getLocation, getWeather, getHourlForecast } from '../services/weatherApi';
+import {
+  getLocation,
+  getWeather,
+  getHourlForecast,
+} from '../services/weatherApi';
 import { Stats } from './Stats/Stats';
-import { Table } from './Table/Table'
+import { Table } from './Table/Table';
 import { Graph } from './Graph/Graph';
+import { CardListBox, CardListText } from './App.styled';
 
 export const App = () => {
-  const [weather, setWeather] = useState(null);
-  const [forecast, setForecast] = useState(null)
   const [showSignUpForm, setShowSignUpForm] = useState(false);
+
+  const [cities, setCities] = useState(() => {
+    const savedCities = localStorage.getItem('cities');
+    return savedCities ? JSON.parse(savedCities) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('cities', JSON.stringify(cities));
+  }, [cities]);
 
   const handleSearch = cityName => {
     getLocation(cityName)
       .then(coords => {
-        getWeather(coords.lat, coords.lon).then(data => setWeather(data))
-        getHourlForecast(coords.lat, coords.lon).then(data => setForecast(data))
+        getWeather(coords.lat, coords.lon).then(weatherData => {
+          getHourlForecast(coords.lat, coords.lon).then(forecastData => {
+            const findCity = cities.find(
+              city => city.weather.id === weatherData.id
+            );
+
+            if (!findCity) {
+              setCities(prev => [
+                ...prev,
+                { weather: weatherData, forecast: forecastData },
+              ]);
+            }
+          });
+        });
       })
-      .catch(() => {
-        setWeather(null)
-        setForecast(null)
-      }) 
-      
+      .catch(() => {});
   };
+
+  const handleDelete = id => {
+    setCities(cities.filter(city => city.weather.id !== id))
+  }
 
   const openSignUpForm = () => setShowSignUpForm(true);
   const closeSignUpForm = () => setShowSignUpForm(false);
 
   return (
-  <>
-    <Container>
-      <Header onOpenSignUp={openSignUpForm} />
-    </Container>
+    <>
+      <Container>
+        <Header onOpenSignUp={openSignUpForm} />
+      </Container>
 
-    <Hero onSearch={handleSearch} />
+      <Hero onSearch={handleSearch} />
 
-    <Container>
-      {weather && <CardList weather={weather} />}
-      {weather && <Stats weather={weather} />}
-      {forecast && <Graph forecast={forecast} />}
-      {forecast && <Table forecast={forecast} />}
-      <Pets />
-    </Container>
+      <Container>
+        {cities.length > 0 ? (
+          <CardList
+            cities={cities}
+            onDelete={handleDelete}
+          />
+        ) : (
+          <CardListBox>
+            <CardListText>Search some city above</CardListText>
+          </CardListBox>
+        )}
 
-    <MobileMenu onOpenSignUp={openSignUpForm} />
+        {cities.length > 0 && <Stats weather={cities[0].weather} />}
+        {cities.length > 0 && <Graph forecast={cities[0].forecast} />}
+        {cities.length > 0 && <Table forecast={cities[0].forecast} />}
 
-    {showSignUpForm && <SignUpForm onClose={closeSignUpForm} />}
-  </>
+        <Pets />
+      </Container>
+
+      <MobileMenu onOpenSignUp={openSignUpForm} />
+
+      {showSignUpForm && <SignUpForm onClose={closeSignUpForm} />}
+    </>
   );
 };

@@ -3,7 +3,7 @@ import bin from './imgs/bin.svg';
 import heart from './imgs/heart.svg';
 import reload from './imgs/reload.svg';
 
-export const CardItem = ({weather: {name, sys: {country}, main: {temp}, dt, weather: weatherDetails}}) => {
+export const CardItem = ({weather: {name, sys: {country}, main: {temp}, dt, weather: weatherDetails}, onDelete}) => {
     const date = new Date(dt * 1000)
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString();
@@ -34,7 +34,7 @@ export const CardItem = ({weather: {name, sys: {country}, main: {temp}, dt, weat
                     <Like type="button"><img src={heart} alt="like" /></Like>
                 </ControlsBox>
                 <SeeMore type="button">See more</SeeMore>
-                <Delete type="button"><img src={bin} alt="delete" /></Delete>
+                <Delete type="button"><img src={bin} alt="delete" onClick={onDelete} /></Delete>
             </ControlsContainer>
         </Item>
     )
