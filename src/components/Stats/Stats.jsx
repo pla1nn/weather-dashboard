@@ -1,5 +1,5 @@
 import { Condition, Item, List, Text, Image } from "./Stats.styled"
-import humidityImg from './imgs/humiditi.png'
+import humidityImg from './imgs/humidity.png'
 import pressureImg from './imgs/pressure.png'
 import tempImg from './imgs/temp.png'
 import visibilityImg from './imgs/visibility.png'

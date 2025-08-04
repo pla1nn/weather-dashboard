@@ -7,18 +7,27 @@ import { SignUpForm } from './SignUpForm/SignUpForm';
 
 import { Hero } from './Hero/Hero';
 import { Pets } from './Pets/Pets';
-import { getLocation, getWeather } from '../services/weatherApi';
+import { getLocation, getWeather, getHourlForecast } from '../services/weatherApi';
 import { Stats } from './Stats/Stats';
+import { Table } from './Table/Table'
+import { Graph } from './Graph/Graph';
 
 export const App = () => {
   const [weather, setWeather] = useState(null);
+  const [forecast, setForecast] = useState(null)
   const [showSignUpForm, setShowSignUpForm] = useState(false);
 
   const handleSearch = cityName => {
     getLocation(cityName)
-      .then(coords => getWeather(coords.lat, coords.lon))
-      .then(data => setWeather(data))
-      .catch(() => setWeather(null));
+      .then(coords => {
+        getWeather(coords.lat, coords.lon).then(data => setWeather(data))
+        getHourlForecast(coords.lat, coords.lon).then(data => setForecast(data))
+      })
+      .catch(() => {
+        setWeather(null)
+        setForecast(null)
+      }) 
+      
   };
 
   const openSignUpForm = () => setShowSignUpForm(true);
@@ -35,6 +44,8 @@ export const App = () => {
     <Container>
       {weather && <CardList weather={weather} />}
       {weather && <Stats weather={weather} />}
+      {forecast && <Graph forecast={forecast} />}
+      {forecast && <Table forecast={forecast} />}
       <Pets />
     </Container>
 
