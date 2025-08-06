@@ -12,6 +12,7 @@ export const Hero = ({ onSearch, date = new Date() }) => {
     const trimmed = city.trim();
     if (trimmed) {
       onSearch(trimmed);
+      setCity('')
     }
   };
 

@@ -11,9 +11,10 @@ import {
   getLocation,
   getWeather,
   getHourlForecast,
+  getDailyForecast,
 } from '../services/weatherApi';
 import { Stats } from './Stats/Stats';
-import { Table } from './Table/Table';
+// import { Table } from './Table/Table';
 import { Graph } from './Graph/Graph';
 import { CardListBox, CardListText } from './App.styled';
 
@@ -32,27 +33,32 @@ export const App = () => {
   const handleSearch = cityName => {
     getLocation(cityName)
       .then(coords => {
-        getWeather(coords.lat, coords.lon).then(weatherData => {
-          getHourlForecast(coords.lat, coords.lon).then(forecastData => {
-            const findCity = cities.find(
-              city => city.weather.id === weatherData.id
-            );
+        Promise.all([
+          getWeather(coords.lat, coords.lon),
+          getHourlForecast(coords.lat, coords.lon),
+          getDailyForecast(coords.lat, coords.lon),
+        ]).then(([weatherData, forecastData, dailyForecast]) => {
+          const findCity = cities.find(
+            city => city.weather.id === weatherData.id);
 
-            if (!findCity) {
-              setCities(prev => [
-                ...prev,
-                { weather: weatherData, forecast: forecastData },
-              ]);
-            }
-          });
+          if (!findCity) {
+            setCities(prev => [
+              ...prev,
+              {
+                weather: weatherData,
+                forecast: forecastData,
+                daily: dailyForecast,
+              },
+            ]);
+          }
         });
       })
       .catch(() => {});
   };
 
   const handleDelete = id => {
-    setCities(cities.filter(city => city.weather.id !== id))
-  }
+    setCities(cities.filter(city => city.weather.id !== id));
+  };
 
   const openSignUpForm = () => setShowSignUpForm(true);
   const closeSignUpForm = () => setShowSignUpForm(false);
@@ -67,10 +73,7 @@ export const App = () => {
 
       <Container>
         {cities.length > 0 ? (
-          <CardList
-            cities={cities}
-            onDelete={handleDelete}
-          />
+          <CardList cities={cities} onDelete={handleDelete} />
         ) : (
           <CardListBox>
             <CardListText>Search some city above</CardListText>
@@ -79,7 +82,7 @@ export const App = () => {
 
         {cities.length > 0 && <Stats weather={cities[0].weather} />}
         {cities.length > 0 && <Graph forecast={cities[0].forecast} />}
-        {cities.length > 0 && <Table forecast={cities[0].forecast} />}
+        {/* {cities.length > 0 && cities[0].daily && <Table daily={cities[0].daily} />} */}
 
         <Pets />
       </Container>
