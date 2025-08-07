@@ -13,13 +13,31 @@ import {
   getHourlForecast,
   getDailyForecast,
 } from '../services/weatherApi';
-import { Stats } from './Stats/Stats';
-// import { Table } from './Table/Table';
-import { Graph } from './Graph/Graph';
 import { CardListBox, CardListText } from './App.styled';
+
+import { Stats } from './Stats/Stats';
+import { Table } from './Table/Table';
+import { Graph } from './Graph/Graph';
+import Footer from './Footer/Footer';
+import Gallery from './Gallery/Gallery';
+import fetchImages from 'services/pixabayApi';
 
 export const App = () => {
   const [showSignUpForm, setShowSignUpForm] = useState(false);
+  
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const getImages = async () => {
+      try {
+        const data = await fetchImages();
+        setImages(data.hits);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getImages();
+  }, []);
 
   const [cities, setCities] = useState(() => {
     const savedCities = localStorage.getItem('cities');
@@ -90,6 +108,8 @@ export const App = () => {
       <MobileMenu onOpenSignUp={openSignUpForm} />
 
       {showSignUpForm && <SignUpForm onClose={closeSignUpForm} />}
+      <Gallery images={images} />
+      <Footer />
     </>
   );
 };
