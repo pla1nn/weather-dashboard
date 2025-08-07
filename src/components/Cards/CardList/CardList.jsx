@@ -1,10 +1,12 @@
 import { CardItem } from "../CardItem/CardItem"
 import { List } from "./CardList.styled"
 
-export const CardList = ({weather}) => {
+export const CardList = ({cities, onDelete}) => {
     return (
         <List>
-            <CardItem weather={weather}></CardItem>
+            {cities.map(({weather}) => (
+                <CardItem key={weather.id} weather={weather} onDelete={() => onDelete(weather.id)}></CardItem>
+            ))}
         </List>
     )
 }

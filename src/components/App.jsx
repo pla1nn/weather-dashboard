@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CardList } from './Cards/CardList/CardList';
 import Container from './Container/Container';
 import { Header } from './Header/Header';
@@ -11,7 +11,10 @@ import {
   getLocation,
   getWeather,
   getHourlForecast,
+  getDailyForecast,
 } from '../services/weatherApi';
+import { CardListBox, CardListText } from './App.styled';
+
 import { Stats } from './Stats/Stats';
 import { Table } from './Table/Table';
 import { Graph } from './Graph/Graph';
@@ -20,9 +23,8 @@ import Gallery from './Gallery/Gallery';
 import fetchImages from 'services/pixabayApi';
 
 export const App = () => {
-  const [weather, setWeather] = useState(null);
-  const [forecast, setForecast] = useState(null);
   const [showSignUpForm, setShowSignUpForm] = useState(false);
+  
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -37,18 +39,43 @@ export const App = () => {
     getImages();
   }, []);
 
+  const [cities, setCities] = useState(() => {
+    const savedCities = localStorage.getItem('cities');
+    return savedCities ? JSON.parse(savedCities) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('cities', JSON.stringify(cities));
+  }, [cities]);
+
   const handleSearch = cityName => {
     getLocation(cityName)
       .then(coords => {
-        getWeather(coords.lat, coords.lon).then(data => setWeather(data));
-        getHourlForecast(coords.lat, coords.lon).then(data =>
-          setForecast(data)
-        );
+        Promise.all([
+          getWeather(coords.lat, coords.lon),
+          getHourlForecast(coords.lat, coords.lon),
+          getDailyForecast(coords.lat, coords.lon),
+        ]).then(([weatherData, forecastData, dailyForecast]) => {
+          const findCity = cities.find(
+            city => city.weather.id === weatherData.id);
+
+          if (!findCity) {
+            setCities(prev => [
+              ...prev,
+              {
+                weather: weatherData,
+                forecast: forecastData,
+                daily: dailyForecast,
+              },
+            ]);
+          }
+        });
       })
-      .catch(() => {
-        setWeather(null);
-        setForecast(null);
-      });
+      .catch(() => {});
+  };
+
+  const handleDelete = id => {
+    setCities(cities.filter(city => city.weather.id !== id));
   };
 
   const openSignUpForm = () => setShowSignUpForm(true);
@@ -63,10 +90,18 @@ export const App = () => {
       <Hero onSearch={handleSearch} />
 
       <Container>
-        {weather && <CardList weather={weather} />}
-        {weather && <Stats weather={weather} />}
-        {forecast && <Graph forecast={forecast} />}
-        {forecast && <Table forecast={forecast} />}
+        {cities.length > 0 ? (
+          <CardList cities={cities} onDelete={handleDelete} />
+        ) : (
+          <CardListBox>
+            <CardListText>Search some city above</CardListText>
+          </CardListBox>
+        )}
+
+        {cities.length > 0 && <Stats weather={cities[0].weather} />}
+        {cities.length > 0 && <Graph forecast={cities[0].forecast} />}
+        {/* {cities.length > 0 && cities[0].daily && <Table daily={cities[0].daily} />} */}
+
         <Pets />
       </Container>
 

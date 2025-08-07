@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
 export const PetsContainer = styled.div`
-    margin-bottom: 200px;
+  margin-bottom: 200px;
 `;
 
 export const Title = styled.h2`
+  margin-top: 80px;
   margin-bottom: 40px;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 500;
 `;
 
 export const List = styled.ul`
