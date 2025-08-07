@@ -28,7 +28,7 @@ export default function Footer() {
           <h4 className={s.contact__title}>Contact us</h4>
           <ul className={s.contact__list}>
             <li>
-              <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+              <a href="https://www.instagram.com/" aria-label="Instagram">
                 <img
                   src={instagram}
                   alt="Instagram"
@@ -37,12 +37,12 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
+              <a href="https://www.facebook.com/" aria-label="Facebook">
                 <img src={facebook} alt="Facebook" className={s.contact__img} />
               </a>
             </li>
             <li>
-              <a href="https://www.whatsapp.com/" target="_blank" aria-label="WhatsApp">
+              <a href="https://www.whatsapp.com/" aria-label="WhatsApp">
                 <img src={whatsapp} alt="WhatsApp" className={s.contact__img} />
               </a>
             </li>
