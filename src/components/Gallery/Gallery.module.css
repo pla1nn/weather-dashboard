@@ -1,0 +1,19 @@
+.gallerySection {
+  display: none;
+
+  @media screen and (min-width: 1200px) {
+    display: block;
+    margin-bottom: 48px;
+  }
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.imageSwiper {
+  width: 384px;
+  height: 211px;
+}
