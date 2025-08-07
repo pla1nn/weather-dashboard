@@ -6,7 +6,7 @@ import { MobileMenu } from './MobileMenu/MobileMenu';
 import { SignUpForm } from './SignUpForm/SignUpForm';
 
 import { Hero } from './Hero/Hero';
-import { Pets } from './Pets/Pets';
+import Pets from './Pets/Pets';
 import {
   getLocation,
   getWeather,
@@ -103,12 +103,13 @@ export const App = () => {
         {/* {cities.length > 0 && cities[0].daily && <Table daily={cities[0].daily} />} */}
 
         <Pets />
+        <Gallery images={images} />
       </Container>
 
       <MobileMenu onOpenSignUp={openSignUpForm} />
 
       {showSignUpForm && <SignUpForm onClose={closeSignUpForm} />}
-      <Gallery images={images} />
+
       <Footer />
     </>
   );

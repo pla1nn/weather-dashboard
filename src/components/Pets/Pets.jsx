@@ -1,29 +1,53 @@
-import { Item, List, PetsContainer, Title, Image, Text, Button } from "./Pets.styled"
-import dog from './dog.jpg'
+import { useEffect, useState, useRef } from 'react';
+import s from './Pets.module.css';
+import fetchNews from '../../services/newsApi';
 
-export const Pets = () => {
-    return (
-        <PetsContainer>
-            <Title>Interacting with our pets</Title>
-            <List>
-                <Item>
-                    <Image src={dog} alt="" />
-                    <Text>Rescue pups pose as ghosts in festive photo shoot</Text>
-                </Item>
-                <Item>
-                    <Image src={dog} alt="" />
-                    <Text>Cat interrupts morning coffee on sunny Washington morning</Text>
-                </Item>
-                <Item>
-                    <Image src={dog} alt="" />
-                    <Text>New study finds dogs pay more attention to women</Text>
-                </Item>
-                <Item>
-                    <Image src={dog} alt="" />
-                    <Text>Petting dogs gives health benefit, even if they are not yours</Text>
-                </Item>
-            </List>
-            <Button>See more</Button>
-        </PetsContainer>
-    )
+export default function Pets() {
+  const [news, setNews] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(4);
+  const listRef = useRef(null);
+
+  useEffect(() => {
+    fetchNews('animals OR pets OR cats OR dogs OR wildlife', 20, 'en')
+      .then(data => setNews(data))
+      .catch(err => console.warn('Новини не завантажено:', err));
+  }, []);
+
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + 4);
+  };
+
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTo({
+        top: listRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }, [visibleCount]);
+
+  return (
+    <section className={s.newsSection}>
+      <h2 className={s.title}>Interacting with our pets</h2>
+      <ul
+        className={s.list}
+        ref={listRef}
+        style={{ maxHeight: '600px', overflowY: 'auto' }}
+      >
+        {news.slice(0, visibleCount).map((item, idx) => (
+          <li key={idx} className={s.card}>
+            {item.urlToImage && (
+              <img src={item.urlToImage} alt={item.title} className={s.image} />
+            )}
+            <p className={s.caption}>{item.title}</p>
+          </li>
+        ))}
+      </ul>
+      {visibleCount < news.length && (
+        <button className={s.button} type="button" onClick={handleLoadMore}>
+          See more
+        </button>
+      )}
+    </section>
+  );
 }
