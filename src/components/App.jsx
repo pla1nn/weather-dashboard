@@ -16,7 +16,7 @@ import {
 import { CardListBox, CardListText } from './App.styled';
 
 import { Stats } from './Stats/Stats';
-import { Table } from './Table/Table';
+// import { Table } from './Table/Table';
 import { Graph } from './Graph/Graph';
 import Footer from './Footer/Footer';
 import Gallery from './Gallery/Gallery';
