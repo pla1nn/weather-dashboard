@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { CardList } from './Cards/CardList/CardList';
 import Container from './Container/Container';
 import { Header } from './Header/Header';
@@ -22,9 +22,11 @@ import Footer from './Footer/Footer';
 import Gallery from './Gallery/Gallery';
 import fetchImages from 'services/pixabayApi';
 
+export const Context = createContext();
+
 export const App = () => {
   const [showSignUpForm, setShowSignUpForm] = useState(false);
-  
+
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -57,7 +59,8 @@ export const App = () => {
           getDailyForecast(coords.lat, coords.lon),
         ]).then(([weatherData, forecastData, dailyForecast]) => {
           const findCity = cities.find(
-            city => city.weather.id === weatherData.id);
+            city => city.weather.id === weatherData.id
+          );
 
           if (!findCity) {
             setCities(prev => [
@@ -82,7 +85,7 @@ export const App = () => {
   const closeSignUpForm = () => setShowSignUpForm(false);
 
   return (
-    <>
+    <Context.Provider>
       <Container>
         <Header onOpenSignUp={openSignUpForm} />
       </Container>
@@ -111,6 +114,6 @@ export const App = () => {
       {showSignUpForm && <SignUpForm onClose={closeSignUpForm} />}
 
       <Footer />
-    </>
+    </Context.Provider>
   );
 };

@@ -1,22 +1,20 @@
-const API_KEY = 'a656a39f2cb2423db889817c84e74c4c';
-const BASE_URL = 'https://newsapi.org/v2';
+const API_KEY = '7a0f88d30758380b4dbe9d076d6ade14';
+const BASE_URL = 'https://gnews.io/api/v4';
 
 export default function fetchNews(
   query = 'pets',
-  pageSize = 4,
-  language = 'en'
+  max = 10,
+  lang = 'en',
+  page = 1
 ) {
-  const endpoint = `${BASE_URL}/everything?q=${encodeURIComponent(
-    query
-  )}&pageSize=${pageSize}&language=${language}&sortBy=publishedAt&apiKey=${API_KEY}`;
-
-  return fetch(endpoint)
-    .then(res => (res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)))
-    .then(({ articles }) => {
-      return articles.filter(article => article.urlToImage);
+  return fetch(
+    `${BASE_URL}/search?q=${encodeURIComponent(
+      query
+    )}&lang=${lang}&max=${max}&page=${page}&sortby=publishedAt&apikey=${API_KEY}`
+  )
+    .then(res => {
+      if (!res.ok) throw new Error('Network error');
+      return res.json();
     })
-    .catch(err => {
-      console.error('Помилка', err);
-      return [];
-    });
+    .then(data => data.articles);
 }
