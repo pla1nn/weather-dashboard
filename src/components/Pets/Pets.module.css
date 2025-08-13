@@ -20,9 +20,8 @@
 .list {
   display: flex;
   gap: 20px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   margin-bottom: 40px;
-  justify-content: flex-start;
 }
 
 .card {

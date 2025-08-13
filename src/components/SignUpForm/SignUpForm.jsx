@@ -1,6 +1,11 @@
+import { Context } from 'components/App';
 import s from './SignUpForm.module.css';
+import { useContext } from 'react';
 
 export const SignUpForm = ({ onClose }) => {
+  const context = useContext(Context);
+  console.log('context', context);
+
   return (
     <div className={s.overlay}>
       <div className={s.formContainer}>
