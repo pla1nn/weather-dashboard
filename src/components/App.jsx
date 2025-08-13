@@ -4,7 +4,6 @@ import Container from './Container/Container';
 import { Header } from './Header/Header';
 import { MobileMenu } from './MobileMenu/MobileMenu';
 import { SignUpForm } from './SignUpForm/SignUpForm';
-
 import { Hero } from './Hero/Hero';
 import Pets from './Pets/Pets';
 import {
@@ -14,9 +13,7 @@ import {
   getDailyForecast,
 } from '../services/weatherApi';
 import { CardListBox, CardListText } from './App.styled';
-
 import { Stats } from './Stats/Stats';
-// import { Table } from './Table/Table';
 import { Graph } from './Graph/Graph';
 import Footer from './Footer/Footer';
 import Gallery from './Gallery/Gallery';
@@ -26,8 +23,16 @@ export const Context = createContext();
 
 export const App = () => {
   const [showSignUpForm, setShowSignUpForm] = useState(false);
+  const [username, setUsername] = useState(() => {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user).username : '';
+  });
 
   const [images, setImages] = useState([]);
+  const [cities, setCities] = useState(() => {
+    const savedCities = localStorage.getItem('cities');
+    return savedCities ? JSON.parse(savedCities) : [];
+  });
 
   useEffect(() => {
     const getImages = async () => {
@@ -40,11 +45,6 @@ export const App = () => {
     };
     getImages();
   }, []);
-
-  const [cities, setCities] = useState(() => {
-    const savedCities = localStorage.getItem('cities');
-    return savedCities ? JSON.parse(savedCities) : [];
-  });
 
   useEffect(() => {
     localStorage.setItem('cities', JSON.stringify(cities));
@@ -61,7 +61,6 @@ export const App = () => {
           const findCity = cities.find(
             city => city.weather.id === weatherData.id
           );
-
           if (!findCity) {
             setCities(prev => [
               ...prev,
@@ -85,9 +84,9 @@ export const App = () => {
   const closeSignUpForm = () => setShowSignUpForm(false);
 
   return (
-    <Context.Provider>
+    <Context.Provider value={{ username, setUsername }}>
       <Container>
-        <Header onOpenSignUp={openSignUpForm} />
+        <Header onOpenSignUp={openSignUpForm} username={username} />
       </Container>
 
       <Hero onSearch={handleSearch} />
@@ -100,18 +99,15 @@ export const App = () => {
             <CardListText>Search some city above</CardListText>
           </CardListBox>
         )}
-
         {cities.length > 0 && <Stats weather={cities[0].weather} />}
         {cities.length > 0 && <Graph forecast={cities[0].forecast} />}
-        {/* {cities.length > 0 && cities[0].daily && <Table daily={cities[0].daily} />} */}
-
         <Pets />
         <Gallery images={images} />
       </Container>
 
-      <MobileMenu onOpenSignUp={openSignUpForm} />
-
-      {showSignUpForm && <SignUpForm onClose={closeSignUpForm} />}
+      {showSignUpForm && (
+        <SignUpForm onClose={closeSignUpForm} setUsername={setUsername} />
+      )}
 
       <Footer />
     </Context.Provider>

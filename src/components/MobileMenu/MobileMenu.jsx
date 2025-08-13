@@ -2,7 +2,7 @@ import { useState } from 'react';
 import s from './MobileMenu.module.css';
 import { FaCircleUser } from 'react-icons/fa6';
 
-export const MobileMenu = ({ onOpenSignUp }) => {
+export const MobileMenu = ({ onOpenSignUp, username }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleMenuClick = () => {
@@ -62,6 +62,7 @@ export const MobileMenu = ({ onOpenSignUp }) => {
               Sign Up
             </button>
             <FaCircleUser className={s.iconUser} />
+            {username && <span className={s.username}>{username}</span>}
           </div>
         </div>
       )}
