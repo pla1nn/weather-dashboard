@@ -2,20 +2,21 @@ import styled from 'styled-components';
 
 export const CardListBox = styled.div`
   display: block;
-  height: 392px;
+  height: 372px;
   width: 100%;
   border-radius: 20px;
   background: #e8e8e8;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 60px;
 
   @media screen and (min-width: 768px) {
-    height: 352px;
+    height: 365px;
   }
 
   @media screen and (min-width: 1200px) {
-    height: 430px;
+    height: 435px;
   }
 `;
 
