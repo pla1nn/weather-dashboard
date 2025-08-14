@@ -2,7 +2,7 @@ import { useState, useEffect, createContext } from 'react';
 import { CardList } from './Cards/CardList/CardList';
 import Container from './Container/Container';
 import { Header } from './Header/Header';
-import { MobileMenu } from './MobileMenu/MobileMenu';
+// import { MobileMenu } from './MobileMenu/MobileMenu';
 import { SignUpForm } from './SignUpForm/SignUpForm';
 import { Hero } from './Hero/Hero';
 import Pets from './Pets/Pets';
