@@ -1,33 +1,50 @@
 .footer {
-  background-color: #ffb36c;
-  padding: 30px 50px;
-  display: flex;
-  justify-content: space-between;
+  background: #ffb36c;
   width: 100%;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 30px;
 
   @media screen and (min-width: 768px) {
-    padding: 35px 100px;
+    text-align: start;
+    padding: 35px;
   }
 
   @media screen and (min-width: 1200px) {
-    max-width: 100%;
-    width: auto;
-    padding: 40px 150px;
+    padding: 40px;
+    justify-content: left;
   }
 }
 
 .footer__logoBox {
   flex-shrink: 0;
+  margin-right: 24px;
+  position: absolute;
+  left: 50px;
+  top: 30px;
+
+  @media screen and (min-width: 768px) {
+    left: 100px;
+    top: 35px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    left: 150px;
+    top: 40px;
+  }
 }
 
 .footer__logo {
   width: 50px;
-  height: 35px;
+  height: 34.483px;
 
   @media screen and (min-width: 768px) {
     width: 58px;
     height: 40px;
+    flex-shrink: 0;
   }
 
   @media screen and (min-width: 1200px) {
@@ -37,21 +54,32 @@
 }
 
 .footer__content {
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 
   @media screen and (min-width: 768px) {
-    display: flex;
+    flex-direction: row;
     gap: 100px;
-    margin-left: 100px;
   }
 
   @media screen and (min-width: 1200px) {
-    gap: 103px;
-    margin-left: 103px;
+    margin-left: 343px;
+  }
+}
+
+.address {
+  margin-bottom: 25px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 0;
+  }
+
+  @media screen and (min-width: 1200px) {
   }
 }
 
 .address__title {
+  color: #000;
   font-family: 'Montserrat Alternates';
   font-size: 12px;
   font-weight: 500;
@@ -63,19 +91,17 @@
 
   @media screen and (min-width: 1200px) {
     font-size: 16px;
-    margin-bottom: 10px;
   }
 }
 
 .address__text {
   font-family: 'Montserrat Alternates';
+  color: #000;
   font-size: 8px;
   font-weight: 500;
-  margin-bottom: 25px;
 
   @media screen and (min-width: 768px) {
     font-size: 10px;
-    margin-bottom: 0;
   }
 
   @media screen and (min-width: 1200px) {
@@ -84,10 +110,11 @@
 }
 
 .contact__title {
+  color: #000;
   font-family: 'Montserrat Alternates';
   font-size: 12px;
   font-weight: 500;
-  margin-bottom: 15px;
+  margin-bottom: 17px;
 
   @media screen and (min-width: 768px) {
     font-size: 14px;
@@ -95,26 +122,25 @@
 
   @media screen and (min-width: 1200px) {
     font-size: 16px;
-    margin-bottom: 10px;
   }
 }
 
 .contact__list {
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 
 .contact__img {
-  width: 20px;
-  height: 20px;
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
 
   @media screen and (min-width: 768px) {
-    width: 24px;
-    height: 24px;
   }
 
   @media screen and (min-width: 1200px) {
-    width: 28px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
   }
 }

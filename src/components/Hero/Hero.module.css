@@ -126,6 +126,10 @@
   justify-content: center;
   align-items: center;
 
+  @media screen and (max-width: 768px) {
+    position: relative;
+  }
+
   @media screen and (min-width: 768px) {
     width: 402px;
   }
@@ -142,6 +146,8 @@
   border-radius: 10px;
   outline: none;
   padding-left: 10px;
+
+  
 
   @media screen and (min-width: 768px) {
     border-radius: 10px 0px 0px 10px;
@@ -179,6 +185,13 @@
   border-left: 2px solid #000;
   background: #ffb36c;
   padding: 0 2px;
+  
+
+  @media screen and (max-width: 768px) {
+    position: absolute;
+    right: -2%;
+    height: 14px;
+  }
   
 
   @media screen and (min-width: 768px) {

@@ -3,7 +3,7 @@ import bin from './imgs/bin.svg';
 import heart from './imgs/heart.svg';
 import reload from './imgs/reload.svg';
 
-export const CardItem = ({weather: {name, sys: {country}, main: {temp}, dt, weather: weatherDetails}, onDelete}) => {
+export const CardItem = ({weather: {name, sys: {country}, main: {temp}, dt, weather: weatherDetails}, onDelete, onReload, seeHourly, seeMore, seeWeekly}) => {
     const date = new Date(dt * 1000)
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
@@ -22,8 +22,8 @@ export const CardItem = ({weather: {name, sys: {country}, main: {temp}, dt, weat
             </LocationContainer>
             <Time>{hours}:{minutes}</Time>
             <BtnContainer>
-            <ForecastBtn type="button">Hourly forecast</ForecastBtn>
-            <ForecastBtn type="button">Weekly forecast</ForecastBtn>
+            <ForecastBtn type="button" onClick={seeHourly}>Hourly forecast</ForecastBtn>
+            <ForecastBtn type="button" onClick={seeWeekly}>Weekly forecast</ForecastBtn>
             </BtnContainer>
             <DateContainer>
                 <DateText>{dateText}</DateText>
@@ -33,11 +33,11 @@ export const CardItem = ({weather: {name, sys: {country}, main: {temp}, dt, weat
             <Degrees>{Math.round(temp)}°C</Degrees>
             <ControlsContainer>
                 <ControlsBox>
-                    <Reload type="button"><img src={reload} alt="reload" /></Reload>
+                    <Reload type="button" onClick={onReload}><img src={reload} alt="reload" /></Reload>
                     <Like type="button"><img src={heart} alt="like" /></Like>
                 </ControlsBox>
-                <SeeMore type="button">See more</SeeMore>
-                <Delete type="button"><img src={bin} alt="delete" onClick={onDelete} /></Delete>
+                <SeeMore type="button" onClick={seeMore}>See more</SeeMore>
+                <Delete type="button" onClick={onDelete}><img src={bin} alt="delete" /></Delete>
             </ControlsContainer>
         </Item>
     )

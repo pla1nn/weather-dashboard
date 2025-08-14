@@ -6,6 +6,7 @@ export const TableSection = styled.div`
   border-radius: 15px;
   background: #e8e8e8;
   padding: 18px 25px 35px 25px;
+  margin-bottom: 60px;
 
   @media screen and (min-width: 768px) {
     padding: 20px 35px 35px 35px;
@@ -54,6 +55,7 @@ export const Item = styled.li`
   display: flex;
   align-items: center;
   flex-direction: column;
+  
 
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -70,11 +72,13 @@ export const Item = styled.li`
     padding: 10px 15px;
     justify-content: space-between;
     height: 40px;
+    position: relative;
   }
 
   @media screen and (min-width: 1200px) {
     padding: 14px 50px;
     height: 47px;
+    
   }
 `;
 
@@ -120,8 +124,11 @@ export const TableBox = styled.div`
   @media screen and (min-width: 768px) {
     display: flex;
     align-items: center;
+    position: absolute;
+    left: 38%;
   }
 
   @media screen and (min-width: 1200px) {
+    left: 42%;
   }
 `;
